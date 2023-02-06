@@ -96,12 +96,6 @@
       <HintPath>..\bin-x64\FFmpeg.AutoGen.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Renci.SshNet">
-      <HintPath>..\bin-x64\Renci.SshNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Renderers">
-      <HintPath>..\bin-x64\Renderers.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
