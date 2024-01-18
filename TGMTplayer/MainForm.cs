@@ -53,8 +53,6 @@ namespace ExamplePlayer
         Thread m_threadCPUusage;
 
 
-        public static int MaxOrderIndex = 0;
-
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,10 +78,9 @@ namespace ExamplePlayer
             _houseKeepingTimer.SynchronizingObject = this;
 
 
-            RenderObjects();
-
-            _houseKeepingTimer.Start();
             
+
+            _houseKeepingTimer.Start();           
 
 
 
@@ -223,21 +220,6 @@ namespace ExamplePlayer
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        private void RenderObjects()
-        {
-            try
-            {
-                string url = "rtsp://admin:vantech123@192.168.1.168:554/ch01/0";
-                string resolution = "1280x720";
-                DisplayCamera(url, resolution, panel1, 0);
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         public void DisplayCamera(string url, string resolution, Panel panelDisplay, int camIndex)
         {
             _cameraFrame = new CameraFrame(url, resolution);
@@ -262,6 +244,29 @@ namespace ExamplePlayer
             return filePath;
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void btn_start_Click(object sender, EventArgs e)
+        {
+            if(btn_start.Text == "Start")
+            {
+                btn_start.Text = "Stop";
+                try
+                {
+                    string url = txt_url.Text;
+                    string resolution = "1280x720";
+                    DisplayCamera(url, resolution, panel1, 0);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            else
+            {
+                btn_start.Text = "Start";
+                _cameraFrame.Stop();
+            }
+        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
