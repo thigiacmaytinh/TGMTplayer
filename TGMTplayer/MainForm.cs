@@ -41,7 +41,6 @@ namespace ExamplePlayer
 
         private PersistWindowState _mWindowState;
         private PerformanceCounter _pcMem;
-        private Timer _houseKeepingTimer;
 
 
         CameraFrame m_currentCameraFrame;
@@ -49,9 +48,6 @@ namespace ExamplePlayer
         private static string _counters = "";
 
         CameraFrame _cameraFrame;
-
-        Thread m_threadCPUusage;
-
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,94 +68,7 @@ namespace ExamplePlayer
 
         private void MainFormLoad(object sender, EventArgs e)
         {
-            _houseKeepingTimer = new System.Timers.Timer(1000);
-            _houseKeepingTimer.Elapsed += HouseKeepingTimerElapsed;
-            _houseKeepingTimer.AutoReset = true;
-            _houseKeepingTimer.SynchronizingObject = this;
-
-
-            
-
-            _houseKeepingTimer.Start();           
-
-
-
-            m_threadCPUusage = new Thread(new ThreadStart(ShowCPUusage));
-            m_threadCPUusage.Start();
-
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        void ShowCPUusage()
-        {
-            try
-            {
-                _cputotalCounter = new PerformanceCounter("Processor", "% Processor Time", "_total", true);
-                _cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName, true);
-                try
-                {
-                    _pcMem = new PerformanceCounter("Process", "Working Set - Private", Process.GetCurrentProcess().ProcessName, true);
-                }
-                catch
-                {
-                    try
-                    {
-                        _pcMem = new PerformanceCounter("Memory", "Available MBytes");
-                    }
-                    catch (Exception ex2)
-                    {
-                        _pcMem = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _cputotalCounter = null;
-            }
-        }
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void HouseKeepingTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            _houseKeepingTimer.Stop();
-
-
-            if (_cputotalCounter != null)
-            {
-                try
-                {
-                    while (_cpuAverages.Count > 4)
-                        _cpuAverages.RemoveAt(0);
-                    _cpuAverages.Add(_cpuCounter.NextValue() / Environment.ProcessorCount);
-
-                    CpuUsage = _cpuAverages.Sum() / _cpuAverages.Count;
-                    CpuTotal = _cputotalCounter.NextValue();
-                    _counters = $"CPU: {CpuUsage:0.00}%";
-
-                    if (_pcMem != null)
-                    {
-                        _counters += " RAM Usage: " + Convert.ToInt32(_pcMem.RawValue / 1048576) + "MB  |";
-                    }
-                    //lblCPU.Text = _counters;
-                }
-                catch
-                {
-                }
-
-                HighCPU = CpuTotal > 90;
-            }
-            else
-            {
-                _counters = "Stats Unavailable - See Log File";
-            }
-
-
-            if (!_shuttingDown)
-                _houseKeepingTimer.Start();
-        }
-
+        }      
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -176,7 +85,6 @@ namespace ExamplePlayer
 
 
             _shuttingDown = true;
-            _houseKeepingTimer?.Stop();
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

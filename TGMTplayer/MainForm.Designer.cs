@@ -23,7 +23,6 @@ namespace ExamplePlayer
                 _mWindowState?.Dispose();
 
                 //_updateTimer?.Dispose();
-                _houseKeepingTimer?.Dispose();
                 //sometimes hangs??
                 //if (_fsw != null)
                 //    _fsw.Dispose();
