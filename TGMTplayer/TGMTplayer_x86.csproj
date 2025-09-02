@@ -160,6 +160,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\lib\TGMTcs\src\TGMTregistry.cs">
+      <Link>TGMTcs\TGMTregistry.cs</Link>
+    </Compile>
     <Compile Include="NativeCalls.cs" />
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
