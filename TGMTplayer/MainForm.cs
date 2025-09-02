@@ -75,9 +75,23 @@ namespace ExamplePlayer
 
             _CameraWindow.Start();         
             _CameraWindow.parent = panelDisplay;
-            _CameraWindow.Click += CameraWindows_Click;            
+            _CameraWindow.Click += CameraWindows_Click;
+            _CameraWindow.NewFrame += _CameraWindow_NewFrame;
 
             panelDisplay.Controls.Add(_CameraWindow);
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        private void _CameraWindow_NewFrame(object sender, TGMTplayer.Sources.NewFrameEventArgs e)
+        {
+            Bitmap bmp = e.Frame;
+            if (bmp == null)
+            {
+                //PrintError("Camera disconnected");
+                return;
+            }
+            pictureBox1.Image = bmp;
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
