@@ -112,6 +112,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\lib\TGMTcs\src\TGMTregistry.cs">
+      <Link>TGMTcs\TGMTregistry.cs</Link>
+    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="NativeCalls.cs" />
     <Compile Include="Program.cs" />
@@ -195,6 +198,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

@@ -20,7 +20,6 @@ namespace ExamplePlayer
             if (disposing)
             {
                 components?.Dispose();
-                _mWindowState?.Dispose();
 
                 //_updateTimer?.Dispose();
                 //sometimes hangs??
@@ -54,10 +53,12 @@ namespace ExamplePlayer
             this.btn_start = new System.Windows.Forms.Button();
             this.txt_url = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.SuspendLayout();
             this.ctxtMnu.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // _helpItem
@@ -111,11 +112,12 @@ namespace ExamplePlayer
             // 
             // panel1
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 71);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(642, 327);
+            this.panel1.Size = new System.Drawing.Size(505, 327);
             this.panel1.TabIndex = 25;
             // 
             // ctxtMnu
@@ -136,13 +138,14 @@ namespace ExamplePlayer
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
             this.groupBox1.Controls.Add(this.btn_start);
             this.groupBox1.Controls.Add(this.txt_url);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(642, 71);
+            this.groupBox1.Size = new System.Drawing.Size(983, 71);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             // 
@@ -150,7 +153,7 @@ namespace ExamplePlayer
             // 
             this.btn_start.Enabled = false;
             this.btn_start.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_start.Location = new System.Drawing.Point(532, 24);
+            this.btn_start.Location = new System.Drawing.Point(751, 25);
             this.btn_start.Name = "btn_start";
             this.btn_start.Size = new System.Drawing.Size(75, 32);
             this.btn_start.TabIndex = 2;
@@ -163,7 +166,7 @@ namespace ExamplePlayer
             this.txt_url.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_url.Location = new System.Drawing.Point(57, 26);
             this.txt_url.Name = "txt_url";
-            this.txt_url.Size = new System.Drawing.Size(469, 29);
+            this.txt_url.Size = new System.Drawing.Size(688, 29);
             this.txt_url.TabIndex = 1;
             this.txt_url.TextChanged += new System.EventHandler(this.txt_url_TextChanged);
             // 
@@ -178,11 +181,22 @@ namespace ExamplePlayer
             this.label1.TabIndex = 0;
             this.label1.Text = "URL";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(505, 71);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(478, 327);
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.ClientSize = new System.Drawing.Size(642, 398);
+            this.ClientSize = new System.Drawing.Size(983, 398);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.HelpButton = true;
@@ -195,11 +209,13 @@ namespace ExamplePlayer
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormClosing);
             this.Load += new System.EventHandler(this.MainFormLoad);
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ctxtMnu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -210,11 +226,7 @@ namespace ExamplePlayer
        
         private MenuItem _helpItem;
         private static string _lastPath = Program.AppPath;
-        private static string _currentFileName = "";
-        
-       
-        private FormWindowState _previousWindowState = FormWindowState.Normal;
-        private bool _shuttingDown;
+
         private IContainer components;
       
 
@@ -231,5 +243,6 @@ namespace ExamplePlayer
         private Label label1;
         private Button btn_start;
         private TextBox txt_url;
+        private PictureBox pictureBox1;
     }
 }
